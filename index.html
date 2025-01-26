@@ -1,11 +1,197 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Hello world!</title>
+    <meta charset="UTF-8">
+    <title>=Danil StimorolGum</title>
+    <style>
+        body {
+            background-color: #000080;
+            color: #FFFFFF; /* Белый текст */
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            background-image: url('images/bliss.jpg');
+            background-repeat: repeat;
+            text-align: center;
+        }
+        .language-switch {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .language-switch button {
+            background-color: #FFD700;
+            color: #000080;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            position: relative;
+        }
+        .language-switch button:hover {
+            background-color: #FF69B4;
+            color: #FFFFFF;
+        }
+        .language-switch button.active {
+            background-color: #FF69B4;
+            color: #FFFFFF;
+        }
+        .language-switch .gif-icon {
+            width: 88px;
+            height: 31px;
+        }
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            background-color: #FFD700;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        .marquee-text {
+            display: inline-block;
+            white-space: nowrap;
+            color: #FF69B4;
+            font-size: 20px;
+            animation: marqueeAnimation 10s linear infinite;
+        }
+        @keyframes marqueeAnimation {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .content {
+            margin: 50px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid #FF69B4;
+            border-radius: 10px;
+        }
+        .content section {
+            display: none;
+        }
+        .content section.active {
+            display: block;
+        }
+        a {
+            color: #00FF00;
+            text-decoration: blink;
+        }
+        a:hover {
+            color: #FFFF00;
+        }
+        footer {
+            margin-top: 50px;
+            position: relative;
+        }
+        footer .footer-gif {
+            width: 88px;
+            height: 31px;
+            margin-top: 10px;
+        }
+        @media (max-width: 600px) {
+            .language-switch button {
+                padding: 8px 16px;
+                font-size: 14px;
+                margin: 5px;
+            }
+            .language-switch .gif-icon {
+                width: 88px;
+                height: 31px;
+                margin-top: 10px;
+            }
+            .content {
+                margin: 20px;
+                padding: 15px;
+            }
+            .marquee-text {
+                font-size: 18px;
+            }
+        }
+    </style>
+    <script>
+        function switchLanguage(lang) {
+            var sections = document.querySelectorAll('.content section');
+            sections.forEach(function(section) {
+                section.classList.remove('active');
+            });
+            var activeSection = document.getElementById(lang);
+            if (activeSection) {
+                activeSection.classList.add('active');
+            }
+            var marqueeRu = document.getElementById('marquee-ru');
+            var marqueeEn = document.getElementById('marquee-en');
+            if (lang === 'ru') {
+                marqueeRu.style.display = 'inline-block';
+                marqueeEn.style.display = 'none';
+            } else if (lang === 'en') {
+                marqueeRu.style.display = 'none';
+                marqueeEn.style.display = 'inline-block';
+            }
+            var btnRu = document.getElementById('btn-ru');
+            var btnEn = document.getElementById('btn-en');
+            if (lang === 'ru') {
+                btnRu.classList.add('active');
+                btnEn.classList.remove('active');
+            } else if (lang === 'en') {
+                btnEn.classList.add('active');
+                btnRu.classList.remove('active');
+            }
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        window.onload = function() {
+            var savedLanguage = localStorage.getItem('preferredLanguage') || 'ru';
+            switchLanguage(savedLanguage);
+            document.getElementById('btn-ru').addEventListener('click', function() {
+                switchLanguage('ru');
+            });
+            document.getElementById('btn-en').addEventListener('click', function() {
+                switchLanguage('en');
+            });
+        };
+    </script>
 </head>
 <body>
-	<p>Hello world!</p>
+    <div class="marquee-container">
+        <span class="marquee-text" id="marquee-ru">Добро пожаловать на мою персональную веб-страницу!</span>
+        <span class="marquee-text" id="marquee-en" style="display: none;">Welcome to my personal webpage!</span>
+    </div>
+    <div class="language-switch">
+        <button id="btn-ru" class="active">Русский</button>
+        <button id="btn-en">English</button>
+    </div>
+    <div class="content">
+        <section id="ru" class="active">
+            <h1>Привет! Я Данил</h1>
+            <img src="images/dancingBanana.gif" alt="DancingBanana" width="200" height="200">
+            <p>Добро пожаловать на мою персональную страницу! Здесь вы найдете информацию обо мне.</p>
+            <h2>Обо мне</h2>
+            <p>Я iOS разработчик. Увлекаюсь 3D печатью, программированием микроконтроллеров Arduino.</p>
+            <h2>Мои ссылки</h2>
+            <ul>
+                <li><a href="https://t.me/stimorol_gum" target="_blank">Мой Telegram</a></li>
+                <li><a href="https://github.com/stmrlGum" target="_blank">Мой GitHub</a></li>
+            </ul>
+            <h2>Контакт</h2>
+            <p>Вы можете связаться со мной по электронной почте: <a href="mailto:stimorolgum@gmail.com">stimorolgum@gmail.com</a></p>
+        </section>
+        <section id="en">
+            <h1>Hello! I'm Danil</h1>
+            <img src="images/dancingBanana.gif" alt="DancingBanana" width="200" height="200">
+            <p>Welcome to my personal webpage! Here you will find information about me.</p>
+            <h2>About Me</h2>
+            <p>I'm an iOS developer. I am interested in 3D printing and programming Arduino microcontrollers.</p>
+            <h2>My Links</h2>
+            <ul>
+                <li><a href="https://t.me/stimorol_gum" target="_blank">My Telegram</a></li>
+                <li><a href="https://github.com/stmrlGum" target="_blank">My GitHub</a></li>
+            </ul>
+            <h2>Contact</h2>
+            <p>You can reach me via email: <a href="mailto:stimorolgum@gmail.com">stimorolgum@gmail.com</a></p>
+        </section>
+        <img src="images/imac.gif" alt="Footer GIF" class="footer-gif">
+        <img src="images/pepsi.gif" alt="Footer GIF" class="footer-gif">
+        <img src="images/webpeople.gif" alt="Footer GIF" class="footer-gif">
+        <img src="images/win95.gif" alt="Footer GIF" class="footer-gif">
+        <img src="images/winxp.gif" alt="Footer GIF" class="footer-gif">
+        <img src="images/y2kid.gif" alt="Footer GIF" class="footer-gif">
+    </div>
 </body>
 </html>
